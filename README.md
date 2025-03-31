@@ -1,1 +1,1 @@
-
+This is a project from 1510 Object-Oriented Programming that reads from a text file to select an object that will be created and used varying from Customer, Employee, Loan, Checking, and Savings. Each of these objects have shared and individual methods that can be selected via the text file. These methods are similar to functions that an employee or customer would expect using a banking software. The project showcases the programmer's understanding of object-oriented programming.
