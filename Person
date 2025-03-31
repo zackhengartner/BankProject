@@ -1,0 +1,61 @@
+//abstract class that contains Three Strings: licenseNumber, name, and address. 
+//Three getter methods: getName(), getLicenseNumber(), and getAddress()
+//Three setter methods: setName(), setLicenseNumber(), and setAddress()
+public abstract class Person
+{
+	protected String licenseNumber; //string for license number
+	protected String name; //string for name
+	protected String address; //string for address
+	
+	public String getName() //method for getting name
+	{
+		return name;
+	}
+	
+	public String getAddress() //method for getting address
+	{
+		return address;
+	}
+	
+	public String getLicenseNumber() //method for getting license number
+	{
+		return licenseNumber;
+	}
+	
+	public void setName(String name) //method for setting name
+	{
+		this.name = name;
+	}
+	
+	public void setAddress(String address) //method for setting address
+	{
+		this.address = address;
+	}
+	
+	public void setLicenseNumber(String licenseNumber) throws Exception//method for setting license number
+	{
+		//number has to be less than 8 characters
+		//need to handle any exceptions using "error" per the handout
+		if (licenseNumber.length() < 8 || licenseNumber.length() > 8)
+		{
+			throw new Exception("error");
+		}
+		
+		char[] licenseCharArray = licenseNumber.toCharArray();
+		if(!Character.isLetter(licenseCharArray[0]) || !Character.isLetter(licenseCharArray[1]))
+		{
+			throw new Exception("error");
+		}
+		
+		for (int i = 2; i < 8; i++)
+		{
+			if (!Character.isDigit(licenseCharArray[i]))
+			{
+				throw new Exception("error");
+			}
+		}
+			this.licenseNumber = licenseNumber;
+	}
+	
+	
+}
