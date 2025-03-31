@@ -1,0 +1,82 @@
+/*
+One double variable: annualInterestRate
+One String: name
+A constructor that takes one double argument and one String argument and then sets
+annualInterestRate and name equal to the appropriate arguments. This constructor
+should then call the no-args constructor of the parent class.
+A second constructor that takes two double arguments, one long argument, and one String
+argument and sets annualInterestRate, accountBalance, accountNumber, and name equal
+to the appropriate arguments.
+Two getter methods: getAnnualInterestRate() and getName()
+Two setter methods: setAnnualInterestRate() and setAccountBalance()
+Two other methods, makeDeposit() and makeWithdrawal(), that add or subtract from
+accountBalance respectively. These methods should take one double argument and return
+nothing. The bank is stingy though and charges $1 for withdrawals from checking accounts.
+If there is enough money in the account, subtract $1 whenever a withdrawal is made.
+A negative value should not be possible, and overdrafts cannot occur. If an overdraft
+would occur, then you must throw an exception with the message “overdraft” and print
+that message to the console. In addition, you should print the message to a text file
+called “output.txt”. Then stop program execution.
+Since it is extending Account, it will also have access to all (non-private) variables and
+methods from Account. 
+ */
+public class Checking extends Account //class for checking account that extends account
+{
+
+	private double annualInterestRate; //annual interest variable
+	private String name; //name variable
+	
+	public Checking (double annualInterestRate, String name) throws Exception //constructor with annual interest and name parameters
+	{
+		super(); //calls the super classes default constructor
+		this.setAnnualInterestRate(annualInterestRate); //sets annualinterestrate to the parameters interest rate
+		this.name = name; //sets name to name from parameters
+	}
+	
+	public Checking(long accountNumber,double accountBalance,double annualInterestRate, String name) throws Exception
+	{
+		super(accountNumber, accountBalance); //calls on the super class constructor that takes in acc number and acc balance
+		this.setAnnualInterestRate(annualInterestRate); //sets annual interest rate using the parameter
+		this.accountBalance = accountBalance;//sets account balance to parameters account balance
+		this.accountNumber = accountNumber; //sets account number to parameters account number
+		this.name = name; //sets name to parameters name
+	}
+	
+	public String getName() //getter method for name
+	{
+		return name;
+	}
+
+	public double getAnnualInterestRate() //getter method for annual interest rate
+	{
+		return annualInterestRate;
+	}
+
+	public void setAnnualInterestRate(double annualInterestRate) //setter method for annual interest rate
+	{
+		this.annualInterestRate = annualInterestRate;
+	}
+	
+	public void setAccountBalance(double accountBalance) //setter method for account balance
+	{
+		this.accountBalance = accountBalance;
+	}
+	
+	public void makeDeposit(double deposit) //method to add deposit money to account balance 
+	{
+		accountBalance += deposit;
+	}
+	
+	public void makeWithdrawal(double withdrawal) throws Exception //withdrawal method to withdrawal money from checking account
+	{
+		if (accountBalance - withdrawal >= 1)
+		{
+			accountBalance = accountBalance - withdrawal - 1; //sets account balance to balance - withdrawal - 1
+		}
+		else 
+		{
+			throw new Exception("overdraft"); //exception overdraft if account owner overdrafts account
+		}
+	}
+
+}
