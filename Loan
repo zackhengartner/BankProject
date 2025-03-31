@@ -1,0 +1,103 @@
+/*
+One double variable: annualInterestRate
+One int variable: numberOfYears
+One Date object (java.util.Date): loanDate
+One String: name
+A constructor that takes one String argument and sets name equal to the argument. This
+constructor also calls the no-args constructor of the parent class and instantiates
+loanDate as a new Date object.
+A second constructor that takes one long argument, two double arguments, one int
+argument, and one String argument and sets accountNumber, accountBalance,
+annualInterestRate, numberOfYears, and name equal to the appropriate arguments. The
+constructor should also instantiate loanDate as a new Date object.
+Four getter methods: getAnnualInterestRate(), getNumberOfYears, getLoanDate(), and
+getName().
+Three setter methods: setAnnualInterestRate(), setNumberOfYears, and
+setAccountBalance().
+A method called getMonthlyPayment() that calculates and returns the monthly payment
+of the loan based on the following formulae:
+Monthly Interest Rate = MIR Account Balance = AB
+Annual Interest Rate = AIR Number of Years = NY
+Monthly Payment = MP Total Payment = TP
+𝑀𝐼𝑅 = 𝐴𝐼𝑅 / 1200
+𝑀𝑃 = (𝐴𝐵 * 𝑀𝐼𝑅) / (1 − (1 / ((1 + 𝑀𝐼𝑅) ^(NY * 12)))
+A method called getTotalPayment() that calculates and returns the total amount to be
+paid across the entire duration of the loan based on this formula:
+𝑇𝑃 = 𝑀𝑃 ∗ 𝑁𝑌 ∗ 12
+Since it is extending Account, it will also have access to all (non-private) variables and
+methods from Account.
+ */
+import java.util.Date;
+
+public class Loan extends Account //class for loan object that extends abstract class acount
+{
+private double annualInterestRate; //variable for the annual interest rate
+private int numberOfYears; //variable for the number of years on loan
+private Date loanDate; //variable for date of the loan
+private String name; //variable for name of person
+
+public Loan(String name) //constructor for loan that takes name parameter
+{
+	super(); //calls default constructor from super class
+	this.name = name; //sets name to name from parameter
+	loanDate = new Date(); //creates loan date object
+}
+
+public Loan(long accountNumber, double accountBalance, double annualInterestRate, int numberOfYears, String name) throws Exception //constuctor for loan with multiple parameters
+{
+	super(accountNumber, accountBalance); //calls super constructor with acc number and acc balance parameters
+	this.setAnnualInterestRate(annualInterestRate); //sets annual interest rate to the parameters annual interest rate
+	this.numberOfYears = numberOfYears; //sets number of years to number of years from parameter list
+	this.name = name; //sets name to name from parameter list
+	loanDate = new Date(); //creates loan date object 
+}
+
+public double getAnnualInterestRate() //getter method for annual interest rate
+{
+	return annualInterestRate;
+}
+
+public int getNumberOfYears() //getter method for number of years
+{
+	return numberOfYears;
+}
+
+public Date getLoanDate() //getter method for loan date
+{
+	return loanDate;
+}
+
+public String getName() //getter method for name
+{
+	return name;
+}
+
+public void setAnnualInterestRate(double annualInterestRate) //setter method for annual interest rate
+{
+	this.annualInterestRate = annualInterestRate;
+}
+
+public void setNumberOfYears(int numberOfYears) //setter method for number of years
+{
+	this.numberOfYears = numberOfYears;
+}
+
+public void setAccountBalance(double accountBalance) //setter method for account balance
+{
+	this.accountBalance = accountBalance;
+}
+
+public double getMonthlyPayment() //getter method for monthly payment
+{
+	double monthlyInterestRate = annualInterestRate / 1200; //monthly interest rate is annual interest rate divided by 1200
+	double monthlyPayment = (accountBalance * monthlyInterestRate) / (1 - (1 / Math.pow(1 + monthlyInterestRate, numberOfYears * 12))); //use formula from handout
+	return monthlyPayment; //returns the monthly payment
+}
+
+public double getTotalPayment() //getter method for total payment
+{
+	double totalPayment = this.getMonthlyPayment() * this.getNumberOfYears() * 12; //total payment formula from handout
+	return totalPayment; //return total payment
+}
+
+}
