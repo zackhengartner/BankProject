@@ -1,0 +1,42 @@
+// One long variable: accountNumber.
+// One double variable: accountBalance.
+// A no-args constructor that generates a random 10-digit number between 0 and 9999999999
+// and stores it in accountNumber. The constructor should also set the accountBalance to zero.
+// A second constructor that takes a long argument and a double argument and sets
+// accountNumber and accountBalance equal to the appropriate arguments.
+// Two getter methods: getAccountBalance() and getAccountNumber().
+// One abstract setter method: setAccountBalance()
+public abstract class Account
+{
+	protected long accountNumber; //long for account #
+	protected double accountBalance;//double for account balance
+
+	public Account() //constructor that generates random 10 digit account numbers and sets it to account number
+	{
+		accountNumber = (long)(Math.random() * 10000000000L);
+		accountBalance = 0;
+	}
+
+	public Account(long accountNumber, double accountBalance) throws Exception //constructor that checks for exception then sets account balance and #
+	{
+		if(accountNumber > 9999999999L) //if statement that throws exception if the account number is less than 10 digits
+		{
+			throw new Exception("error");
+		}
+		
+		this.accountNumber = accountNumber;
+		this.accountBalance = accountBalance;
+	}
+
+	public long getAccountNumber() //getter method for account number
+	{
+		return accountNumber;
+	}
+
+	public double getAccountBalance() //getter method for account balance
+	{
+		return accountBalance;
+	}
+
+	public abstract void setAccountBalance(double accountBalance); //abstract method for setting account balance
+}
