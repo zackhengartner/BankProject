@@ -1,0 +1,33 @@
+// A constructor that takes three String arguments and sets licenseNumber, name, and
+// address equal to the arguments.
+// Since it is extending Person, it will also have access to all (non-private) variables and
+// methods from Person. 
+
+public class Customer extends Person //class for customer object that is extending the person abstract class
+{
+	public Customer(String name, String address, String licenseNumber) throws Exception //constructor that sets name, address, and license number
+	{
+		this.name = name;
+		this.address = address;
+		if (licenseNumber.length() < 8 || licenseNumber.length() > 8) //if statement that checks if license number is greater or less than 8
+		{
+			throw new Exception("error");
+		}
+		
+		char[] licenseCharArray = licenseNumber.toCharArray(); //character array of the licenseNumber
+		if(!Character.isLetter(licenseCharArray[0]) || !Character.isLetter(licenseCharArray[1])) //if statement to check if the first two are characters in the license number
+		{
+			throw new Exception("error");
+		}
+		
+		for (int i = 2; i < 8; i++) //for loop to check if the next six are digits in the license number
+		{
+			if (!Character.isDigit(licenseCharArray[i]))
+			{
+				throw new Exception("error");
+			}
+		}
+			this.licenseNumber = licenseNumber; //sets license number from parameter
+	}
+	
+}
