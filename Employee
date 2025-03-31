@@ -1,0 +1,74 @@
+/*
+One int variable: employeeID.
+A constructor that takes three String arguments and one int argument and sets
+licenseNumber, name, address, and employeeID equal to the appropriate arguments.
+One getter methods: getEmployeeID()
+One setter methods: setEmployeeID()
+Since it is extending Person, it will also have access to all (non-private) variables and
+methods from Person. 
+ */
+public class Employee extends Person
+{
+	private int employeeID; //variable for EmployeeID
+	
+	public Employee(String name, String address, String licenseNumber, int employeeID) throws Exception
+	{
+		this.name = name; //sets name to name from parameters
+		this.address = address;	//sets address to address from parameters
+		if (licenseNumber.length() < 8 || licenseNumber.length() > 8) //if statement that checks if license number is greater or less than 8
+		{
+			throw new Exception("error");
+		}
+		
+		char[] licenseCharArray = licenseNumber.toCharArray(); //character array of the licenseNumber
+		if(!Character.isLetter(licenseCharArray[0]) || !Character.isLetter(licenseCharArray[1])) //if statement to check if the first two are characters in the license number
+		{
+			throw new Exception("error");
+		}
+		
+		for (int i = 2; i < 8; i++) //for loop to check if the next six are digits in the license number
+		{
+			if (!Character.isDigit(licenseCharArray[i]))
+			{
+				throw new Exception("error");
+			}
+		}
+			this.licenseNumber = licenseNumber; //sets license number from parameter
+			String tempEmployee = String.valueOf(employeeID); //temp string that is the string of the employeeID
+			if (tempEmployee.length() > 8) //if statement that checks if the strings length is not equal to 8 then throws error exception
+			{
+				throw new Exception("error");
+			}
+			
+			this.employeeID = employeeID; //sets employeeID to employeeID from parameters
+
+		/**
+		 * code for the class license number goes here.
+		 * see the customer class. need to check the length
+		 * the first two characters have to be letters and the 
+		 * 2 through 8 have to be numbers. for this one you have
+		 * to check the employeeID per the hand out
+		 */	
+	}
+	
+	public int getEmployeeID() //getter method for employeeID
+	{
+		return employeeID;
+	}
+	
+	public void setEmployeeID(int employeeID) throws Exception //setter method for employeeID
+	{
+		String employ = Integer.toString(employeeID);
+		if (employ.length() > 8)
+		{
+			throw new Exception("error");
+		}
+		this.employeeID = employeeID;
+		/**
+		 * first check that the number meets the criteria in the handout
+		 * if not throw error, if met set the employee id
+		 * the criteria is it must be exactly 8 in length
+		 * if this is not met then 0s are to be added to the front til its 8
+		 */
+	}
+}
